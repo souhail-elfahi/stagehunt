@@ -1,4 +1,4 @@
-# internship-hunter
+# StageHunt
 
 [English](README.md) · Français
 

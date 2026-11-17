@@ -1,7 +1,7 @@
 ---
-description: Walk a new user through installing internship-hunter, step by step
+description: Walk a new user through installing StageHunt, step by step
 ---
-Guide the user through installing internship-hunter on their own machine.
+Guide the user through installing StageHunt on their own machine.
 
 How to run this guide:
 - Reply in the user's language. If they write in French, the whole guide is in French. Otherwise English.
