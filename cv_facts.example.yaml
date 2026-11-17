@@ -1,0 +1,116 @@
+# EXAMPLE fact bank (fictional person, matches profile.example.md).
+# Copy to cv_facts.fr.yaml (git-ignored) and rewrite every entry from YOUR profile.md.
+# For English CVs, add a translation of this bank: see cv_facts.example.en.yaml.
+#
+# Rules:
+# - Every text is a faithful French rendering of a fact in profile.md (see `source`).
+#   The CV scripts never write prose: they only select, order and label what is here.
+# - `variants` may only swap vocabulary for a cluster (same facts, same scope).
+# - `skills` tags use the canonical names of profile.md / skills_dictionary.py.
+# - An entry with a `check:` field is NOT final: the build refuses to run until it is removed.
+# - Skills lines come from the profile.md tiers (tier 1 first, then tier 2, tier 3 never),
+#   grouped by `categories`; "(avancé)" only on tier-1 skills in Programmation.
+
+contact:
+  source: "profile.md > Contact"
+  name: "Camille Exemple"
+  email: "camille.exemple@example.com"
+  phone: "+33 6 00 00 00 00"
+  city: "Lille, France"
+  linkedin: "https://www.linkedin.com/in/camille-exemple/"
+  github: "https://github.com/camille-exemple"
+
+# Headline under the name, on every CV (your own words; omit it to show the current degree).
+headline: "Étudiante en M1 Statistique et Économétrie — Stage de 4 mois à partir d'avril 2027"
+
+formation:
+  - id: f_m1
+    source: "profile.md > Education > Degree 1"
+    degree: "Master 1 Statistique et Économétrie (en cours)"
+    institution: "Université Exemple"
+    dates: "2026–2027"
+    courses: "Économétrie, Analyse de données, Machine learning, Bases de données SQL"
+    skills: [Statistics, Machine learning, SQL]
+  - id: f_licence
+    source: "profile.md > Education > Degree 2"
+    degree: "Licence Économie et Gestion"
+    institution: "Université Exemple"
+    dates: "2023–2026"
+    courses: "Statistique, Probabilités, Microéconomie, Excel appliqué à la gestion"
+    skills: [Statistics, Microeconomics, Excel]
+
+experiences:
+  - id: e_retail
+    source: "profile.md > Experience 1"
+    role: "Stagiaire analyste"
+    organisation: "Exemple Retail SAS"
+    dates: "juin – août 2025"
+    start: "2025-06"        # YYYY-MM, sorts Expérience professionnelle most recent first
+    tools: "Excel, PowerPoint"
+    bullets:
+      - id: e_retail_1
+        text: "Nettoyage et fusion des extractions hebdomadaires de ventes de trois magasins sous Excel"
+        skills: [Excel, Data quality]
+      - id: e_retail_2
+        text: "Construction d'un tableau de bord mensuel des ventes, présenté aux responsables de magasin"
+        skills: [Data visualisation, PowerPoint]
+        variants:
+          data analyst: "Construction d'un dashboard mensuel des ventes (KPI), présenté aux responsables de magasin"
+
+projets:
+  - id: p_churn
+    source: "profile.md > Experience 2"
+    role: "Projet académique – prédiction de l'attrition (en équipe de 3)"
+    organisation: "Université Exemple, M1"
+    dates: "oct. – déc. 2026"
+    tools: "R, Python"
+    bullets:
+      - id: p_churn_1
+        text: "Estimation d'une régression logistique pour prédire l'attrition client sur un jeu de données public"
+        skills: [Logistic regression, R]
+      - id: p_churn_2
+        text: "Comparaison avec une forêt aléatoire et présentation des résultats"
+        skills: [Random Forest, scikit-learn, Python]
+
+langues:
+  source: "profile.md > Languages"
+  items:
+    - "Français : langue maternelle"
+    - "Anglais : B2 (TOEIC 850)"
+
+categories:
+  "Méthodes quantitatives":
+    Statistics: "Statistiques, économétrie"
+    Linear regression: "Régression linéaire"
+    Logistic regression: "Régression logistique"
+    Random Forest: "Forêts aléatoires"
+    K-Means: "K-means"
+    HCA: "CAH"
+    PCA: "ACP"
+    Clustering/segmentation: "Segmentation (clustering)"
+    Machine learning: "Machine learning"
+    Microeconomics: "Microéconomie"
+  "Programmation":
+    R: "R"
+    Python: "Python"
+    SQL: "SQL"
+    pandas: "pandas"
+    scikit-learn: "scikit-learn"
+    tidyverse: "tidyverse"
+    ggplot2: "ggplot2"
+  "Outils":
+    Excel: "Excel"
+    PowerPoint: "PowerPoint"
+    Microsoft 365: "Microsoft 365"
+    Data visualisation: "Visualisation de données"
+    Data quality: "Qualité des données"
+
+# Recruiter-vocabulary synonyms (pure synonyms only). `match` is a regex searched in the offers.
+aliases:
+  Data visualisation:
+    - {label: "Data visualisation", match: "data ?visuali[sz]ation"}
+
+# Per-offer skills selection for tailor_cv.py (canonical names); other offers get the top 10.
+tailoring:
+  "https://example.com/jobs/123":
+    skills: [Statistics, Logistic regression, R, Python, SQL, Excel]

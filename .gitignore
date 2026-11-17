@@ -1,0 +1,17 @@
+.venv/
+__pycache__/
+*.csv
+*.jsonl
+charts/
+profile.md
+market_report.md
+cv_facts.fr.yaml
+cvs/
+cv_facts.en.yaml
+.env
+credentials/
+backups/
+logs/
+pending_sync.jsonl
+tests/fixtures/email_alerts/private/
+.claude/settings.local.json

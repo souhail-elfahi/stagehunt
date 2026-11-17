@@ -1,0 +1,97 @@
+# EXAMPLE English translation of the fact bank (fictional person, matches cv_facts.example.yaml).
+# Copy to cv_facts.en.yaml (git-ignored) and translate YOUR cv_facts.fr.yaml, then build with
+#     python tailor_cv.py <job_url> --lang en
+#
+# Rules:
+# - Texts only, keyed by the ids of the French bank. Entries, order, skill tags, `start` dates
+#   and tiers come from the French bank and profile.md: nothing can be added here.
+# - Faithful translation, no inflation. Reuse the English wording of profile.md where it exists.
+# - `variants` only swap vocabulary for a cluster (same facts, same scope).
+# - The build stops if a text is missing here or an id doesn't exist in the French bank.
+
+headline: "M1 student in Statistics and Econometrics — 4-month internship from April 2027"
+
+# Degree titles: faithful translation, original French name in parentheses.
+formation:
+  f_m1:
+    degree: "Master 1 in Statistics and Econometrics (Master 1 Statistique et Économétrie), in progress"
+    institution: "Université Exemple"
+    dates: "2026–2027"
+    courses: "Econometrics, Data analysis, Machine learning, SQL databases"
+  f_licence:
+    degree: "Bachelor's degree in Economics and Management (Licence Économie et Gestion)"
+    institution: "Université Exemple"
+    dates: "2023–2026"
+    courses: "Statistics, Probability, Microeconomics, Excel for business"
+
+experiences:
+  e_retail:
+    role: "Analyst intern"
+    organisation: "Exemple Retail SAS"
+    dates: "June – August 2025"
+    tools: "Excel, PowerPoint"
+    bullets:
+      e_retail_1: "Cleaned and merged weekly sales extracts from three stores in Excel"
+      e_retail_2:
+        text: "Built a monthly sales report, presented to store managers"
+        variants:
+          data analyst: "Built a monthly sales dashboard (KPIs), presented to store managers"
+
+projets:
+  p_churn:
+    role: "Academic project – churn prediction (team of 3)"
+    organisation: "Université Exemple, M1"
+    dates: "Oct – Dec 2026"
+    tools: "R, Python"
+    bullets:
+      p_churn_1: "Estimated a logistic regression to predict customer churn on a public dataset"
+      p_churn_2: "Compared it with a random forest and presented the results"
+
+langues:
+  - "French: native"
+  - "English: B2 (TOEIC 850)"
+
+# Category names and skill labels. "(advanced)" is appended only to tier-1 Programming skills.
+categories:
+  "Méthodes quantitatives":
+    name: "Quantitative methods"
+    labels:
+      Statistics: "Statistics, econometrics"
+      Linear regression: "Linear regression"
+      Logistic regression: "Logistic regression"
+      Random Forest: "Random forests"
+      K-Means: "K-means"
+      HCA: "Hierarchical clustering"
+      PCA: "PCA"
+      Clustering/segmentation: "Segmentation (clustering)"
+      Machine learning: "Machine learning"
+      Microeconomics: "Microeconomics"
+  "Programmation":
+    name: "Programming"
+    labels:
+      R: "R"
+      Python: "Python"
+      SQL: "SQL"
+      pandas: "pandas"
+      scikit-learn: "scikit-learn"
+      tidyverse: "tidyverse"
+      ggplot2: "ggplot2"
+  "Outils":
+    name: "Tools"
+    labels:
+      Excel: "Excel"
+      PowerPoint: "PowerPoint"
+      Microsoft 365: "Microsoft 365"
+      Data visualisation: "Data visualisation"
+      Data quality: "Data quality"
+
+# Optional. English synonyms (same format as the French bank); the French ones are not reused.
+aliases:
+  Machine learning:
+    - {label: "Statistical learning", match: "statistical learning"}
+
+# Optional. A skills list for the English CV of an offer; it replaces the French bank's list
+# for that URL. Order within a tier = order of the list.
+tailoring:
+  "https://example.com/jobs/123":
+    skills: [Statistics, Logistic regression, R, Python, SQL, Excel, PowerPoint]

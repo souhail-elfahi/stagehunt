@@ -1,0 +1,35 @@
+# Texts of the "📘 Guide" tab, approved by the user. setup_sheet.py copies them verbatim and
+# never rewords them: change wording here only with the user's approval.
+sections:
+  - title: "> ROUTINE DU JOUR"
+    checklist:
+      - "Lire le digest Telegram"
+      - "Données > Vues filtrées > 🔍 Triage : chaque offre → À postuler ou Pas intéressé"
+      - "Cockpit > Cibles prioritaires : postuler (objectif du jour)"
+      - "Après chaque candidature : Statut Postulé + CV utilisé"
+      - "Envoyer 1 message à un ancien"
+      - "Traiter les relances en rouge"
+    note: "Décoche tout le soir."
+
+  - title: "> STATUTS"
+    table:
+      - ["À trier", "nouvelle offre, pas encore décidée"]
+      - ["À postuler", "l'offre me plaît"]
+      - ["Postulé", "candidature envoyée"]
+      - ["Réponse RH", "l'entreprise a répondu"]
+      - ["Entretien RH", "premier entretien"]
+      - ["Entretien manager", "entretien avec le futur chef"]
+      - ["Test/case", "test technique ou étude de cas"]
+      - ["Offre", "on me propose le stage"]
+      - ["Refus", "réponse négative"]
+      - ["Ghosté", "aucune réponse après relances"]
+      - ["Pas intéressé", "l'offre ne me correspond pas"]
+      - ["Offre fermée", "je n'ai pas pu postuler"]
+
+  - title: "> RÈGLES D'OR"
+    numbered:
+      - "Une candidature ciblée vaut mieux que cinq génériques."
+      - "Je ne mets sur mon CV que ce que je peux défendre en entretien."
+      - "Je relance une fois, poliment, puis je passe à la suite."
+      - "Un refus, c'est une réponse, pas un jugement sur moi."
+      - "VPN coupé et Excel fermé aux heures des runs (8h, 11h, 14h, 17h, 20h)."

@@ -1,0 +1,154 @@
+# My settings for internship-hunter. Generic, commented version: config.example.yaml.
+# Everything specific to one person lives here; the code has no personal values.
+
+timezone: Europe/Paris
+
+search:
+  country: France                  # Indeed's country site
+  terms:                           # "stage " is added in front when a term doesn't contain it
+    - data analyst
+    - data scientist
+    - stage data
+    - stage chargé d'études statistiques
+    - stage économétrie
+    - stage statisticien
+  narrow_terms:                    # rarer wording: fewer LinkedIn results, no priority-area search
+    - stage chargé d'études statistiques
+    - stage économétrie
+    - stage statisticien
+  indeed_results: 100              # one Indeed request returns up to 100 offers
+  pause_seconds: 3                 # between two requests
+  # Location -> LinkedIn results per term. One LinkedIn request = 10 results.
+  # Requests per run = sum over searches of (1 Indeed + ceil(LinkedIn / 10)).
+  cli:                             # python find_internships.py: 24 requests per window
+    locations: {"France": 20, "Lille, France": 20}
+    narrow_locations: {"France": 10}
+  full_scan:                       # first run of the day, 7-day window: 39 requests
+    hours: 168
+    locations: {"France": 60, "Lille, France": 20}
+    narrow_locations: {"France": 20}
+  quick_scan:                      # every other run, 24h window: 18 requests
+    hours: 24
+    locations: {"France": 10, "Lille, France": 10}
+    narrow_locations: {"France": 10}
+  watch_cap: "Lille, France"       # quick-scan searches that hit their cap here are reported
+  linkedin_descriptions: 20        # LinkedIn description fetches per run (new offers only)
+
+priority:                          # where I want to work (no move)
+  name: Lille                      # the metro area; a location starting with it counts as inside
+  region: Hauts-de-France          # shown first in the digest (🏠), in the cockpit and a filter view
+  towns:                           # towns of the metro area (accents, case and hyphens don't matter)
+    - lille
+    - roubaix
+    - tourcoing
+    - villeneuve d'ascq
+    - marcq en baroeul
+    - lambersart
+    - la madeleine
+    - lomme
+    - hellemmes
+    - wasquehal
+    - croix
+    - mons en baroeul
+    - loos
+    - lezennes
+    - ronchin
+    - faches thumesnil
+    - seclin
+    - wattrelos
+    - hem
+    - armentieres
+    - haubourdin
+    - marquette lez lille
+    - saint andre lez lille
+    - wambrechies
+    - halluin
+    - comines
+    - mouvaux
+    - bondues
+    - lesquin
+    - templemars
+    - wattignies
+    - englos
+    - sequedin
+    - neuville en ferrain
+    - roncq
+    - linselles
+    - quesnoy sur deule
+    - lys lez lannoy
+    - leers
+    - lannoy
+    - toufflers
+    - sailly lez lannoy
+    - villeneuve dascq
+    - euralille
+    - santes
+    - emmerin
+    - vendeville
+    - fretin
+    - sainghin en melantois
+    - baisieux
+    - chereng
+    - forest sur marque
+    - tressin
+    - anstaing
+    - gruson
+    - willems
+    - marcq
+    - perenchies
+    - verlinghem
+    - lompret
+    - premesques
+    - capinghem
+    - erquinghem lys
+    - houplines
+    - frelinghien
+    - deulemont
+    - wervicq sud
+    - bousbecque
+    - noyelles les seclin
+    - wavrin
+    - don
+    - allennes les marais
+    - carnin
+    - annoeullin
+    - bauvin
+    - provin
+    - la bassee
+
+fit_score:                         # 0-100, see fit_score.py
+  skills: 45                       # x share of the offer's skills that are tier 1-2 in profile.md
+  roles:                           # Type de poste
+    "analyste / études": 20
+    "data scientist": 16
+    "ingénieur data / IA": 6
+    "autre": 8
+  place:                           # Lieu
+    priority_area: 15              # inside the priority metro area
+    priority_region: 10            # elsewhere in the priority region
+    regions: {"Île-de-France": 12} # other regions with their own score
+    other: 10
+  pay:                             # Rémunération, €/month
+    legal_min_hourly: 4.50         # French legal minimum gratification, €/h: UPDATE EACH JANUARY
+    hours_per_month: 151.67        # 35 h x 52 weeks / 12
+    high: 1200                     # >= high: high points
+    mid: 900                       # >= mid: mid points; above the legal minimum: low points
+    points: {high: 10, mid: 6, low: 3, unknown: 2, legal_minimum: 0}
+  freshness:                       # Fraîcheur: [max age in days, points]; older = 0
+    steps: [[1, 10], [3, 6], [7, 3]]
+    unknown: 3                     # no publication date
+  short_internship:                # under min_months: minus penalty
+    min_months: 4
+    penalty: 15
+
+runs:
+  min_interval_minutes: 175        # never scrape more often than every 3h (small margin)
+  follow_up_days: 7                # Postulé for this many days or more: follow-up due
+  schedule:                        # the Windows scheduled task (setup /setup shows the command)
+    start: "08:00"
+    every_hours: 3
+    for_hours: 14                  # 08:00, 11:00, 14:00, 17:00, 20:00
+
+goals:                             # dashboard defaults; once set in the sheet, the sheet wins
+  daily: 3
+  weekly: 15

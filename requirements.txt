@@ -1,0 +1,17 @@
+# Scraping + analysis
+python-jobspy==1.4.1   # pinned: fetch_descriptions.py uses its private LinkedIn._fetch_details
+pandas>=3.1
+requests>=2.34
+matplotlib>=3.11
+
+# CV generation (Windows: page count and PDF export go through Word)
+python-docx>=1.2
+PyYAML>=6.0
+pypdf>=7.1
+docx2pdf>=0.1.8
+pywin32>=312
+
+# Google Sheet sync + Telegram alerts
+gspread>=6.2
+beautifulsoup4>=4.12   # email_alerts.py (also a jobspy dependency)
+python-dotenv>=1.2

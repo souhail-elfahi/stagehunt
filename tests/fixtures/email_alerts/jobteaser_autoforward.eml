@@ -1,0 +1,14 @@
+From: JobTeaser <notifications@jobteaser.com>
+To: student@university.example
+Delivered-To: job-alerts@example.com
+X-Forwarded-For: student@university.example job-alerts@example.com
+Subject: Nouvelles offres de stage pour vous
+Date: Mon, 16 Nov 2026 18:05:00 +0100
+MIME-Version: 1.0
+Content-Type: text/html; charset=utf-8
+Content-Transfer-Encoding: 8bit
+
+<html><body><ul>
+<li><a href="https://www.jobteaser.com/fr/job-offers/3f2a9c1e-77aa-4b1c-9d10-1234567890ab-banque-de-france-stage-economiste-h-f?utm_medium=email">Stage Économiste (H/F)</a><br>Banque de France<br>Paris, France · Stage · 6 mois</li>
+<li><a href="https://www.jobteaser.com/fr/job-offers/9b8c7d6e-1111-4222-8333-abcdefabcdef-insee-stage-econometrie">Stage en économétrie appliquée</a><br>Insee<br>Lille, France · Stage</li>
+</ul><p><a href="https://www.jobteaser.com/fr/job-offers">Voir toutes les offres</a></p></body></html>

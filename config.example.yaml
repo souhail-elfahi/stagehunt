@@ -1,0 +1,92 @@
+# internship-hunter settings. Copy this file to config.yaml and change the values to yours.
+# /setup walks you through it. Everything personal lives here: the code has no personal values.
+# The example values work as they are (a data-internship search in France, priority area Lyon).
+
+timezone: Europe/Paris             # your time zone (IANA name); the sheet is set to the same one
+
+search:
+  country: France                  # Indeed's country site
+  terms:                           # what you'd type in the search bar. "stage " is added in front
+    - data analyst                 # when a term doesn't contain it, so every query is an internship
+    - data scientist
+    - stage data
+    - stage statisticien
+  narrow_terms:                    # terms with few offers: fewer LinkedIn results and no search
+    - stage statisticien           # in the priority area (the nationwide search covers it)
+  indeed_results: 100              # one Indeed request returns up to 100 offers: keep 100
+  pause_seconds: 3                 # wait between two requests
+  # Each scan maps a location to the number of LinkedIn results per term.
+  # One LinkedIn request = 10 results, one Indeed request per search.
+  # Requests per run = sum over searches of (1 + ceil(LinkedIn / 10)). Keep a run at 40 or fewer
+  # requests: LinkedIn starts answering "429 too many requests" when you ask too much.
+  cli:                             # python find_internships.py (one-off CSV)
+    locations: {"France": 20, "Lyon, France": 20}
+    narrow_locations: {"France": 10}
+  full_scan:                       # first run of the day, last 7 days
+    hours: 168
+    locations: {"France": 40, "Lyon, France": 20}
+    narrow_locations: {"France": 20}
+  quick_scan:                      # every other run, last 24 hours
+    hours: 24
+    locations: {"France": 10, "Lyon, France": 10}
+    narrow_locations: {"France": 10}
+  watch_cap: "Lyon, France"        # quick scans that return their full count here are logged:
+                                   # if it happens often, raise the number for this location
+  linkedin_descriptions: 20        # LinkedIn description fetches per run (new offers only)
+
+priority:                          # where you want to work: these offers come first
+  name: Lyon                       # the metro area; a location starting with this name counts as inside
+  region: Auvergne-Rhône-Alpes     # its region, as spelled by regions.py (2016 French regions)
+  towns:                           # towns of the metro area (accents, case and hyphens don't matter)
+    - lyon
+    - villeurbanne
+    - venissieux
+    - vaulx en velin
+    - bron
+    - caluire et cuire
+    - saint priest
+    - oullins
+    - ecully
+    - tassin la demi lune
+    - decines charpieu
+    - meyzieu
+    - rillieux la pape
+    - limonest
+    - dardilly
+
+fit_score:                         # how offers are scored, 0-100 (see fit_score.py)
+  skills: 45                       # x the share of the offer's skills you rate tier 1-2 in profile.md
+  roles:                           # points by type of job (the classifier's four classes, keep the keys)
+    "analyste / études": 20        # data analyst, economist, statistician, survey analyst
+    "data scientist": 16
+    "ingénieur data / IA": 6       # data engineer, AI/ML engineer
+    "autre": 8                     # anything else
+  place:                           # points by location
+    priority_area: 15              # inside the priority metro area
+    priority_region: 10            # elsewhere in the priority region
+    regions: {"Île-de-France": 12} # other regions with their own score (can be empty: {})
+    other: 10
+  pay:                             # monthly internship pay
+    legal_min_hourly: 4.50         # French legal minimum gratification in €/h: UPDATE EACH JANUARY
+    hours_per_month: 151.67        # 35 h x 52 weeks / 12
+    high: 1200                     # >= high gets the high points
+    mid: 900                       # >= mid gets the mid points; above the legal minimum: low points
+    points: {high: 10, mid: 6, low: 3, unknown: 2, legal_minimum: 0}
+  freshness:                       # [max age in days, points]; older offers get 0
+    steps: [[1, 10], [3, 6], [7, 3]]
+    unknown: 3                     # no publication date
+  short_internship:                # internships shorter than min_months lose `penalty` points
+    min_months: 4
+    penalty: 15
+
+runs:
+  min_interval_minutes: 175        # never scrape more often than every 3 hours (small margin)
+  follow_up_days: 7                # "Postulé" for this many days or more: time to follow up
+  schedule:                        # the Windows scheduled task (/setup shows the command)
+    start: "08:00"
+    every_hours: 3
+    for_hours: 14                  # 08:00, 11:00, 14:00, 17:00, 20:00
+
+goals:                             # cockpit defaults; once you change them in the sheet, the sheet wins
+  daily: 3                         # applications per day
+  weekly: 15                       # applications per week
